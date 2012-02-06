@@ -1,5 +1,9 @@
 MultiFileUploadDemo::Application.routes.draw do
-  resources :galleries
+  resources :galleries do
+    resources :photos
+  end
+  
+  root :to => 'galleries#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
