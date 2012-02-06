@@ -5,14 +5,30 @@
   <%= @gallery.name %>
 </p>
 
-<% @gallery.photos.each do |photo| %>
-  <div>
-    <%= image_tag photo.file.url(:thumb) %>
-  </div>
-<% end %>
+<ul id="photos" class="cf">
+  <%= render @gallery.photos %>
+</ul>
 
-<%= link_to 'Add Photo', new_gallery_photo_path(@gallery) %> |
+<input id="fileupload" type="file" name="photo[file]" multiple>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="/jquery-file-upload/vendor/jquery.ui.widget.js"></script>
+<script src="/jquery-file-upload/jquery.iframe-transport.js"></script>
+<script src="/jquery-file-upload/jquery.fileupload.js"></script>
+<script>
+$(function () {
+    $('#fileupload').fileupload({
+        dataType: 'json',
+        url: '<%= gallery_photos_path(@gallery) %>',
+        done: function (e, data) {
+            $.each(data.result, function (index, file) { 
+               $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#photos');
+            });
+        }
+    });
+});
+</script>
 
-
-<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
-<%= link_to 'Back', galleries_path %>
+<p>
+  <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
+  <%= link_to 'Back', galleries_path %>
+</p>
