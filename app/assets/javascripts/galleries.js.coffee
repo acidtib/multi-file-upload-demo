@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+$ ->
+  addPhoto = (file) ->
+    $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#photos')
+
+  $('#fileupload').fileupload
+    dataType: 'json'
+    url: $('#fileupload').data('photos-path')
+    done: (e, data) ->
+      addPhoto file for file in data.result

@@ -9,24 +9,8 @@
   <%= render @gallery.photos %>
 </ul>
 
-<input id="fileupload" type="file" name="photo[file]" multiple>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="/jquery-file-upload/vendor/jquery.ui.widget.js"></script>
-<script src="/jquery-file-upload/jquery.iframe-transport.js"></script>
-<script src="/jquery-file-upload/jquery.fileupload.js"></script>
-<script>
-$(function () {
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        url: '<%= gallery_photos_path(@gallery) %>',
-        done: function (e, data) {
-            $.each(data.result, function (index, file) { 
-               $('<li><img src="'+file.thumbnail_url+'"></li>').appendTo('#photos');
-            });
-        }
-    });
-});
-</script>
+<input id="fileupload" type="file" name="photo[file]"
+       data-photos-path="<%= gallery_photos_path(@gallery) %>" multiple>
 
 <p>
   <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
