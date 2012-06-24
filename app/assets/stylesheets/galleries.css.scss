@@ -2,15 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-ul#photos {
-  list-style: none;
-  li {
-    float: left;
-    display: block;
-    width: 120px;
-  }
-}
-
-ul#photos:after {
-  clear: both;
+.photo-delete {
+  margin: 5px auto;
+  text-align: center;
+  display: block;
 }
