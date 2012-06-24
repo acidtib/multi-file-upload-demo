@@ -5,8 +5,7 @@
   <%= @gallery.name %>
 </p>
 
-<ul id="photos" class="cf">
-  <%= render @gallery.photos %>
+<ul id="photos" class="thumbnails" data-json-url="<%= gallery_path(@gallery, :format => :json) %>">
 </ul>
 
 <input id="fileupload" type="file" name="photo[file]"
